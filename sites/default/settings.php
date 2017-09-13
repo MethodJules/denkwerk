@@ -221,7 +221,7 @@ $databases = array (
   array (
     'default' => 
     array (
-      'database' => 'designthinking_tool',
+      'database' => 'denkwerk',
       'username' => 'root',
       'password' => '',
       'host' => 'localhost',
