@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <head>
-<?php print $head; ?>
+	<?php print '<img src="'. base_path() .'/sites/default/files/images/Banner_Denkwerk.png"/>'; ?>
+
+    <?php print $head; ?>
 <title><?php print $head_title; ?></title>
 <?php print $styles; ?>
 <?php print $scripts; ?>
