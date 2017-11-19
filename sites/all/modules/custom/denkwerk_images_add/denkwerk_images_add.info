@@ -1,3 +1,4 @@
 name=Denkwerk Image Add Tool
 description=Tool for adding images to nodes
 core=7.x
+configure= admin/settings/denkwerk_images_add

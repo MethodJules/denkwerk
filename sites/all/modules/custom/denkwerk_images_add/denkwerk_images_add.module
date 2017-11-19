@@ -29,22 +29,21 @@ function denkwerk_images_add_get_type() {
 	$path = arg(1,current_path());
 	switch ($path) {
 		case ("epk"):
-			$path = base_path() . 'sites/default/files/images/FotoEPK.png';
+			$path = base_path() . variable_get('denkwerk_images_add_image_epk', 'sites/default/files/images/FotoEPK.png');
 			break;
 		case ("geschäftsmodelle"):
-			$path = base_path() . 'sites/default/files/images/FotoGeschaeftsmodell.png';
+			$path = base_path() . variable_get('denkwerk_images_add_image_business_model', 'sites/default/files/images/FotoGeschaeftsmodell.png');
+;
 			break;
 		case ("interviewführung"):
-			$path = base_path() . 'sites/default/files/images/FotoInterview.png';
+			$path = base_path() . variable_get('denkwerk_images_add_image_interview', 'sites/default/files/images/FotoInterview.png');
 			break;
 		case ("methodische_weiterentwicklung"):
-			$path = base_path() . 'sites/default/files/images/FotoNachhaltigkeit.png';
+			$path = base_path() . variable_get('denkwerk_images_add_image_method', 'sites/default/files/images/FotoNachhaltigkeit.png');
 			break;
-		case ("interviewführung"):
-			$path = base_path() . 'sites/default/files/images/FotoInterview.png';
-			break;
+
 		case ("evaluierung"):
-			$path = base_path() . 'sites/default/files/images/FotoEvaluation.png';
+			$path = base_path() . variable_get('denkwerk_images_add_image_evaluation', 'sites/default/files/images/FotoEvaluation.png');
 			break;
 		case ("anleitungen"):
 			$path = base_path() . 'sites/default/files/images/FotoWerkzeuge.png';
@@ -52,4 +51,98 @@ function denkwerk_images_add_get_type() {
 
 	}
 	return $path;
+}
+
+/**
+ * Implements hook_menu().
+ */
+function denkwerk_images_add_menu() {
+
+	$items = array();
+
+	$items['admin/settings/denkwerk_images_add'] = array(
+		'title' => t('Adding images'),
+		'description' => t('Form to add images.'),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('denkwerk_images_add_admin'),
+		'access arguments' => array('administer content'),
+		'type' => MENU_NORMAL_ITEM,
+	);
+
+	return $items;
+}
+
+/**
+ * Administration form for denkwerk_images_add
+ *
+ */
+function denkwerk_images_add_admin($form, &$form_state) {
+	/**
+	$form['denkwerk_images_add'] = array(
+		'#type' => 'checkbox',
+		'#title' => t('Change image.'),
+		'#default' => variable_get('denkwerk_images_add_enable', 0),
+	);
+	**/
+	$form['denkwerk_images_add_image_epk'] = array(
+		'#title' => t('Path to image for Event Process Chain (EPC)'),
+		'#type' => 'textfield',
+		'#description' => t(''),
+		'#default' => variable_get('denkwerk_images_add_image_epk', 'sites/default/files/images/FotoEPK.png'),
+		'#attributes' => array(
+			'placeholder' => 'sites/default/files/images/FotoEPK.png',
+		),
+	);
+
+	$form['denkwerk_images_add_image_business_model'] = array(
+		'#title' => t('Path to image for business model'),
+		'#type' => 'textfield',
+		'#description' => t(''),
+		'#default' => variable_get('denkwerk_images_add_image_business_model', 'sites/default/files/images/FotoGeschaeftsmodell.png'),
+		'#attributes' => array(
+			'placeholder' => 'sites/default/files/images/FotoGeschaeftsmodell.png',
+		),
+	);
+
+	$form['denkwerk_images_add_image_interview'] = array(
+		'#title' => t('Path to image for interview'),
+		'#type' => 'textfield',
+		'#description' => t(''),
+		'#default' => variable_get('denkwerk_images_add_image_interview', 'sites/default/files/images/FotoInterview.png'),
+		'#attributes' => array(
+			'placeholder' => 'sites/default/files/images/FotoInterview.png',
+		),
+	);
+
+	$form['denkwerk_images_add_image_method'] = array(
+		'#title' => t('Path to image for method'),
+		'#type' => 'textfield',
+		'#description' => t(''),
+		'#default' => variable_get('denkwerk_images_add_image_method', 'sites/default/files/images/FotoNachhaltigkeit.png'),
+		'#attributes' => array(
+			'placeholder' => 'sites/default/files/images/FotoNachhaltigkeit.png',
+		),
+	);
+
+	$form['denkwerk_images_add_image_evaluation'] = array(
+		'#title' => t('Path to image for evalutaion'),
+		'#type' => 'textfield',
+		'#description' => t(''),
+		'#default' => variable_get('denkwerk_images_add_image_evaluation', 'sites/default/files/images/FotoEvaluation.png'),
+		'#attributes' => array(
+			'placeholder' => 'sites/default/files/images/FotoEvaluation.png',
+		),
+	);
+
+	$form['denkwerk_images_add_image_instructions'] = array(
+		'#title' => t('Path to image for instructions'),
+		'#type' => 'textfield',
+		'#description' => t(''),
+		'#default' => variable_get('denkwerk_images_add_image_instructions', 'sites/default/files/images/FotoWerkzeuge.png'),
+		'#attributes' => array(
+			'placeholder' => 'sites/default/files/images/FotoWerkzeuge.png',
+		),
+	);
+
+	return system_settings_form($form);
 }
